@@ -29,15 +29,25 @@ namespace topit
     p_t next(p_t) const override;
     p_t d;
   };
+
+  size_t getpoints(const IDraw& d, p_t** pts, size_t s);
+  f_t frame(const p_t* pts, size_t s);
 }
 
 int main()
 {
   int err = 0;
   using topit::IDraw;
+  using topit::f_t;
   using topit::p_t;
   using topit::Dot;
   IDraw* shps[3] = {};
+  p_t* pts = nullptr;
+  size_t s = 0;
+  for (size_t i = 0; i < 3; ++i) {
+    s += topit::getpoints(*(shps[0]), &pts, s);
+  }
+  f_t fr = topit::frame(pts, s);
   try {
   shps[0] = new Dot(0, 0);
   shps[1] = new Dot(5, 7);
@@ -46,6 +56,7 @@ int main()
     err = 2;
     std::cerr << "Bad Drawing\n";
   }
+  delete[] pts;
   delete shps[0];
   delete shps[1];
   delete shps[2];
