@@ -36,6 +36,16 @@ int main()
   std::cout << (a == b) << '\n';
 }
 
+topit::Dot::Dot(int x, int y):
+  IDraw(),
+  d{x, y}
+{}
+
+topit::Dot::Dot(p_t dd):
+  IDraw(),
+  d{dd}
+{}
+
 bool topit::operator==(p_t a, p_t b)
 {
   return a.x == b.x && a.y == b.y;
@@ -50,11 +60,6 @@ topit::p_t topit::Dot::begin() const
 {
   return d;
 }
-
-topit::Dot(int x, int y):
-  IDraw(),
-  d{x, y}
-{}
 
 topit::p_t topit::Dot::next(p_t prev) const 
 {
