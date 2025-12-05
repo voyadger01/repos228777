@@ -21,8 +21,11 @@ namespace topit
 
   struct Dot: IDraw
   {
+    Dot(int x, int y);
+    explicit Dot(p_t dd);
     p_t begin() const override;
     p_t next(p_t) const override;
+    p_t d;
   };
 }
 
@@ -41,4 +44,22 @@ bool topit::operator==(p_t a, p_t b)
 bool topit::operator!=(p_t a, p_t b)
 {
   return !(a == b);
+}
+
+topit::p_t topit::Dot::begin() const
+{
+  return d;
+}
+
+topit::Dot(int x, int y):
+  IDraw(),
+  d{x, y}
+{}
+
+topit::p_t topit::Dot::next(p_t prev) const 
+{
+  if (prev != begin()) {
+    throw std::logic_error("bad impl");
+  }
+  return d;
 }
