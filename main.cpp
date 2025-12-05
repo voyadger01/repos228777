@@ -36,6 +36,14 @@ namespace topit
     p_t next(p_t) const override;
     p_t a, b;
   };
+  struct HrzLine: IDraw
+  {
+    HrzLine(int x1, int x2, int y);
+    explicit HrzLine(p_t aa, p_t bb);
+    p_t begin() const override;
+    p_t next(p_t) const override;
+    p_t a, b;
+  };
   size_t getpoints(const IDraw& d, p_t** pts, size_t s);
   f_t frame(const p_t* pts, size_t s);
   char* canvas(f_t fr, char fill);
