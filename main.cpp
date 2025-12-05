@@ -33,6 +33,8 @@ namespace topit
   size_t getpoints(const IDraw& d, p_t** pts, size_t s);
   f_t frame(const p_t* pts, size_t s);
   char* canvas(f_t fr, char fill);
+  void paint(char* cnv, f_t fr, p_t* pts, char fill);
+  void flush(std::ostream& os, const char* cnv, f_t fr);
 }
 
 int main()
@@ -50,6 +52,10 @@ int main()
   }
   f_t fr = topit::frame(pts, s);
   char* cnv = topit::canvas(fr, '.');
+  for (size_t i = 0; i < s; ++i) {
+    topit::paint(cnv, fr, pts[i], '#');
+  }
+  topit::flush(std::cout, cnv, fr);
   try {
   shps[0] = new Dot(0, 0);
   shps[1] = new Dot(5, 7);
