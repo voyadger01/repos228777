@@ -13,7 +13,6 @@ namespace topit
   {
     p_t aa, bb;
   };
-  
   struct IDraw
   {
     virtual p_t begin() const = 0;
@@ -29,7 +28,14 @@ namespace topit
     p_t next(p_t) const override;
     p_t d;
   };
-
+  struct VertLine: IDraw
+  {
+    VertLine(int x, int y1, int y2);
+    explicit VertLine(p_t aa, p_t bb);
+    p_t begin() const override;
+    p_t next(p_t) const override;
+    p_t a, b;
+  };
   size_t getpoints(const IDraw& d, p_t** pts, size_t s);
   f_t frame(const p_t* pts, size_t s);
   char* canvas(f_t fr, char fill);
