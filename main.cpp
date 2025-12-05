@@ -110,3 +110,39 @@ topit::p_t topit::Dot::next(p_t prev) const
   }
   return d;
 }
+
+topit::VertLine::VertLine(int x, int y1, int y2):
+  IDraw(),
+  a{x, y1},
+  b{x, y2}
+{}
+
+topit::VertLine::VertLine(p_t aa, p_t bb):
+  IDraw(),
+  a{aa},
+  b{bb}
+{
+  if (a.x != b.x) {
+    throw std::invalid_argument("this line is not vertical");
+  }
+}
+
+topit::p_t topit::VertLine::begin() const
+{
+  return a;
+}
+
+topit::p_t topit::VertLine::next(p_t prev) const
+{
+  if (prev == b) {
+    return b;
+  }
+  if (prev.x != a.x) {
+    throw std::logic_error("bad impl");
+  }
+  int next_y = (b.y > a.y) ? prev.y + 1 : prev.y - 1;
+  if ((b.y > a.y && next_y > b.y) || (b.y < a.y && next_y < b.y)) {
+    return b;
+  }
+  return {a.x, next_y};
+}
