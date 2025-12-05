@@ -33,7 +33,7 @@ namespace topit
   size_t getpoints(const IDraw& d, p_t** pts, size_t s);
   f_t frame(const p_t* pts, size_t s);
   char* canvas(f_t fr, char fill);
-  void paint(char* cnv, f_t fr, p_t* pts, char fill);
+  void paint(char* cnv, f_t fr, p_t pts, char fill);
   void flush(std::ostream& os, const char* cnv, f_t fr);
 }
 
