@@ -32,6 +32,7 @@ namespace topit
 
   size_t getpoints(const IDraw& d, p_t** pts, size_t s);
   f_t frame(const p_t* pts, size_t s);
+  char* canvas(f_t fr, char fill);
 }
 
 int main()
@@ -48,6 +49,7 @@ int main()
     s += topit::getpoints(*(shps[0]), &pts, s);
   }
   f_t fr = topit::frame(pts, s);
+  char* cnv = topit::canvas(fr, '.');
   try {
   shps[0] = new Dot(0, 0);
   shps[1] = new Dot(5, 7);
@@ -57,6 +59,7 @@ int main()
     std::cerr << "Bad Drawing\n";
   }
   delete[] pts;
+  delete[] cnv;
   delete shps[0];
   delete shps[1];
   delete shps[2];
