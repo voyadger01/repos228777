@@ -154,3 +154,39 @@ topit::p_t topit::VertLine::next(p_t prev) const
   }
   return {a.x, next_y};
 }
+
+topit::HrzLine::HrzLine(int x1, int x2, int y):
+  IDraw(),
+  a{x1, y},
+  b{x2, y}
+{}
+
+topit::HrzLine::HrzLine(p_t aa, p_t bb):
+  IDraw(),
+  a{aa},
+  b{bb}
+{
+  if (a.y != b.y) {
+    throw std::invalid_argument("this line is not horizontal");
+  }
+}
+
+topit::p_t topit::HrzLine::begin() const
+{
+  return a;
+}
+
+topit::p_t topit::HrzLine::next(p_t prev) const
+{
+  if (prev == b) {
+    return b;
+  }
+  if (prev.y != a.y) {
+    throw std::logic_error("bad impl");
+  }
+  int next_x = (b.x > a.x) ? prev.x + 1 : prev.x - 1;
+  if ((b.x > a.x && next_x > b.x) || (b.x < a.x && next_x < b.x)) {
+    return b;
+  }
+  return {next_x, a.y};
+}
