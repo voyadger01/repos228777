@@ -5,8 +5,10 @@ namespace topit
   {
     int x, y;
   };
+
   bool operator==(p_t, p_t);
   bool operator!=(p_t, p_t);
+
   struct f_t
   {
     p_t aa, bb;
@@ -31,9 +33,23 @@ namespace topit
 
 int main()
 {
+  int err = 0;
+  using topit::IDraw;
   using topit::p_t;
-  p_t a{1, 0}, b{1, 0};
-  std::cout << (a == b) << '\n';
+  using topit::Dot;
+  IDraw* shps[3] = {};
+  try {
+  shps[0] = new Dot(0, 0);
+  shps[1] = new Dot(5, 7);
+  shps[2] = new Dot(-5, -2);
+  } catch (...) {
+    err = 2;
+    std::cerr << "Bad Drawing\n";
+  }
+  delete shps[0];
+  delete shps[1];
+  delete shps[2];
+  return err;
 }
 
 topit::Dot::Dot(int x, int y):
